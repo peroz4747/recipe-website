@@ -1,0 +1,113 @@
+
+@mixin badges($background, $textColor) {
+    background-color: $background;
+    color: $textColor;
+    border-radius: 20px;
+    width: fit-content;
+    padding: 0 20px;
+    margin: 5px auto;
+  }
+  
+  @mixin list-styles($position) {
+    ul{
+      padding: 0;
+      li {
+        list-style-type: none;
+        text-align: $position;
+      }
+    }
+  }
+  
+  @mixin column-styles($num) {
+    display: grid;
+    justify-content: center;
+    @if $num == 2 {
+      grid-template-columns: 45% 45%;
+      gap: 20px;
+    }
+    @if $num == 3 {
+      grid-template-columns: 30% 30% 30%;
+    }
+  }
+  
+  @media (min-width: 1000px) {
+    .recipe-details {
+      width: 900px;
+      margin: auto;
+    }
+  }
+  
+  body {
+    background-color: #eaeaea;
+  }
+  .recipe-list {
+    padding: 20px;
+    background-color: rgb(207, 207, 207);
+    margin: 20px;
+    display: inline-flex;
+    width: calc(100vw - 150px);
+    flex-wrap: wrap;
+    border: 5px inset white;
+    .recipe-card {
+      background-color: #f7f7f7;
+      width: 210px;
+      padding: 20px;
+      margin: 20px auto;
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);;
+      transition: 0.5s;
+      border-radius: 15px;
+    }
+    .recipe-card:hover {
+      background-color: rgb(142, 255, 249);
+      cursor: pointer;
+    }
+  }
+  .recipe-details {
+    padding: 20px;
+    .title-wrapper {
+      h2 {
+        font-size: xxx-large;
+        margin: 0px auto 40px auto;
+  
+      }
+    }
+    .inline-wrapper {
+      &.three-column {
+        @include column-styles(3)
+      }
+      &.two-column {
+        @include column-styles(2)
+      }
+      .ingredient-wrapper {
+        @include list-styles(end);
+      }
+      .measurements-wrapper {
+        @include list-styles(start);
+      }
+      .area-wrapper {
+        .area-badge {
+          @include badges(#3498db, #fff)
+        }
+      }
+      .category-wrapper {
+        .category-badge {
+          @include badges(#27ae60, #fff)
+        }
+      }
+      .tags-wrapper {
+        @include list-styles('none');
+        .tags-badge {
+          @include badges(#f39c12, #333);
+        }
+      }
+    }
+    .instructions-wrapper {
+      padding: 0 25px;
+    }
+  }
+  
+  .disclaimer {
+    margin: 20px;
+    background-color: #ffde24;
+    padding: 20px;
+  } 
